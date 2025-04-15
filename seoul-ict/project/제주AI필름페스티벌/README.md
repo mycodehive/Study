@@ -1,5 +1,7 @@
 https://youtu.be/oX4MW1rnC_Y
 
+http://www.jjaiff.kr/
+
 사용한 AI : GPT4o, DALL-E, CAPCUT, Clipchamp, Supertone, Runway
 
 국문 : 설문대할망, 깨어나다
