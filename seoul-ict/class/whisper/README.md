@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/6489b03f-804c-4ebd-b27d-f16bb2b2d862)
+
 # 모델 선택
 model_name = st.selectbox("Whisper 모델 선택", ["tiny", "base", "small", "medium", "large"], index=1)
 model = whisper.load_model(model_name)
