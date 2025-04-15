@@ -61,3 +61,7 @@
 >
 >Google Docs : [https://docs.google.com/document/d/1BMVVvwdUbuOgPqAxZ6644Fkr5GLpo8zpEisSsnekLC4/edit?usp=sharing](https://docs.google.com/document/d/1BMVVvwdUbuOgPqAxZ6644Fkr5GLpo8zpEisSsnekLC4/edit?usp=sharing)
 
+6. 데이터셋
+>https://nhiss.nhis.or.kr/   국민건강보험공단이에요,  데이터 찾으셔서 낙상 관련 진단 코드로 고령자 낙상 데이터 추출 가능합니다. 
+>https://opendata.hira.or.kr/ - 심평원 데이터 있는 곳이에요, 낙상 진료 코드로 검색, 병원 이용 현황, 연령대별 통계 확인 가능합니다.
+
