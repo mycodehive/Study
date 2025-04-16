@@ -68,5 +68,7 @@
 ---------------------------------------
 
 [study]
-  - medipipe : [https://velog.io/@givemetangerine/MediaPipe-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%9C%AF%EC%96%B4%EB%B3%B4%EC%9E%90](https://velog.io/@givemetangerine/MediaPipe-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%9C%AF%EC%96%B4%EB%B3%B4%EC%9E%90)
+  - medipipe
+     - [https://velog.io/@givemetangerine/MediaPipe-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%9C%AF%EC%96%B4%EB%B3%B4%EC%9E%90](https://velog.io/@givemetangerine/MediaPipe-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%9C%AF%EC%96%B4%EB%B3%B4%EC%9E%90)
+     - [https://github.com/google-ai-edge/mediapipe/tree/master/mediapipe/python](https://github.com/google-ai-edge/mediapipe/tree/master/mediapipe/python)
 
