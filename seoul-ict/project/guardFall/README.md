@@ -65,3 +65,8 @@
 >https://nhiss.nhis.or.kr/   국민건강보험공단이에요,  데이터 찾으셔서 낙상 관련 진단 코드로 고령자 낙상 데이터 추출 가능합니다. 
 >https://opendata.hira.or.kr/ - 심평원 데이터 있는 곳이에요, 낙상 진료 코드로 검색, 병원 이용 현황, 연령대별 통계 확인 가능합니다.
 
+---------------------------------------
+
+[study]
+  - medipipe : [https://velog.io/@givemetangerine/MediaPipe-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%9C%AF%EC%96%B4%EB%B3%B4%EC%9E%90](https://velog.io/@givemetangerine/MediaPipe-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%9C%AF%EC%96%B4%EB%B3%B4%EC%9E%90)
+
