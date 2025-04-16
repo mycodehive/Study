@@ -1,16 +1,26 @@
 import os
 import sqlite3
 import util as ut
-
-env_info = ut.load_config()
-
+import toml
+import streamlit as st
 
 # 1. data 폴더가 없으면 생성
 if not os.path.exists("data"):
     os.makedirs("data")
 
 # 2. DB 경로 설정
-db_path = os.path.join(ut.exedir("script"), env_info["database"]["path"])
+# 로컬에서 원하는 경로로 지정하는 경우에만 -[------------------
+"""
+toml_path = os.path.join(ut.exedir("script"), "\\.streamlit\\secrets.toml")
+
+print("exedir: ",ut.exedir("script"))
+print("toml_path:", toml_path)
+
+secrets = toml.load(toml_path)
+"""
+# -]-----------------------------------------------------
+
+db_path = st.secrets['database']['path']
 
 # 3. SQLite 연결
 conn = sqlite3.connect(db_path)

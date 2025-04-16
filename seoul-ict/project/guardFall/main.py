@@ -9,4 +9,4 @@ import util as ut
 # msg.send_message("낙상 감지됨! 즉시 확인 바랍니다.1")
 
 # dbprocess : DB 전송 함수
-# db.insert_fall_event("홍길동", "2023-10-01 12:00:00", "거실")
+# db.insert_fall_event("홍길동1", "2023-10-01 12:00:00", "거실")
