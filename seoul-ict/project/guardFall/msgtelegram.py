@@ -20,9 +20,6 @@ secrets = toml.load(toml_path)
 TELEGRAM_TOKEN = st.secrets['telegram']['TELEGRAM_TOKEN']
 CHAT_ID = st.secrets['telegram']['CHAT_ID']
 
-print("Telegram Token:", TELEGRAM_TOKEN)
-print("Chat ID:", CHAT_ID)
-
 bot = Bot(token=TELEGRAM_TOKEN)
 
 async def send_telegram_message(text: str):

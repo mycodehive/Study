@@ -1,2 +1,4 @@
-telegram
-python-telegram-bot
+streamlit==1.44.1
+opencv-python==4.11.0.86
+mediapipe==0.10.21
+python-telegram-bot==22.0

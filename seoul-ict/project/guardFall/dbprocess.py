@@ -41,8 +41,8 @@ if not os.path.isfile(db_path):
     )
     """)
     conn.commit()
-else:
-    print("DB 파일이 이미 존재합니다.")
+#else:
+#    print("DB 파일이 이미 존재합니다.")
 
 # 5. CRUD 함수 정의
 

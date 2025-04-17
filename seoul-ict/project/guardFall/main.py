@@ -1,4 +1,3 @@
-import getcapture as gct
 import getposedata as gpd
 import msgtelegram as msg
 import dbprocess as db
