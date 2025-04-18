@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+import time
 
 # MediaPipe의 pose 모듈과 그리기 도구 준비
 mp_drawing = mp.solutions.drawing_utils
@@ -7,6 +8,9 @@ mp_pose = mp.solutions.pose
 
 # 웹캠 열기
 cap = cv2.VideoCapture(0)
+
+# 시간 측정용 변수 초기화
+last_print_time = time.time()
 
 # MediaPipe Pose 객체 만들기 (최적화 옵션 포함)
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
@@ -31,10 +35,23 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             mp_drawing.draw_landmarks(
                 image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS
             )
+            current_time = time.time()
+            if current_time - last_print_time >= 3:
+                # 필요한 관절 값 추출
+                landmarks = results.pose_landmarks.landmark
+                left_shoulder = landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER]
+                right_shoulder = landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER]
+                left_knee = landmarks[mp_pose.PoseLandmark.LEFT_KNEE]
+                right_knee = landmarks[mp_pose.PoseLandmark.RIGHT_KNEE]
 
-            # 관절 위치 출력 (예: 오른쪽 무릎)
-            right_knee = results.pose_landmarks.landmark[mp_pose.PoseLandmark.RIGHT_KNEE]
-            print(f"오른쪽 무릎 위치 - x: {right_knee.x}, y: {right_knee.y}, z: {right_knee.z}")
+                print("=== 3초마다 출력 ===")
+                print(f"왼쪽 어깨 - x: {left_shoulder.x:.3f}, y: {left_shoulder.y:.3f}, z: {left_shoulder.z:.3f}, 신뢰도: {left_shoulder.visibility}")
+                print(f"오른쪽 어깨 - x: {right_shoulder.x:.3f}, y: {right_shoulder.y:.3f}, z: {right_shoulder.z:.3f}, 신뢰도: {right_shoulder.visibility}")
+                print(f"왼쪽 무릎 - x: {left_knee.x:.3f}, y: {left_knee.y:.3f}, z: {left_knee.z:.3f}, 신뢰도: {left_knee.visibility}")
+                print(f"오른쪽 무릎 - x: {right_knee.x:.3f}, y: {right_knee.y:.3f}, z: {right_knee.z:.3f}, 신뢰도: {right_knee.visibility}")
+                print("====================")
+
+                last_print_time = current_time  # 마지막 출력 시간 갱신
 
         # 화면에 출력
         cv2.imshow('Pose Tracking', image)
