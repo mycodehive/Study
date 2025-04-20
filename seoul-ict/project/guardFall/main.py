@@ -4,6 +4,9 @@ import dbprocess as db
 import streamlit as st
 import util as ut
 
+# 관절움직임 데이터 가져오기
+# gpd.start_pose_detection()
+
 # msgtelegram : 메시지 전송 함수
 # msg.send_message("낙상 감지됨! 즉시 확인 바랍니다.1")
 
