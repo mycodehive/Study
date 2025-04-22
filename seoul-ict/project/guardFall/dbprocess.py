@@ -8,18 +8,6 @@ import streamlit as st
 if not os.path.exists("data"):
     os.makedirs("data")
 
-# 2. DB 경로 설정
-# 로컬에서 원하는 경로로 지정하는 경우에만 -[------------------
-"""
-toml_path = os.path.join(ut.exedir("script"), "\\.streamlit\\secrets.toml")
-
-print("exedir: ",ut.exedir("script"))
-print("toml_path:", toml_path)
-
-secrets = toml.load(toml_path)
-"""
-# -]-----------------------------------------------------
-
 db_path = st.secrets['database']['path']
 
 # 3. SQLite 연결
@@ -29,7 +17,7 @@ cursor = conn.cursor()
 if not os.path.exists(db_path):
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     
-if not os.path.isfile(db_path):
+if os.path.isfile(db_path):
     open(db_path, 'w').close()
     # 4. 테이블 생성 (낙상 이벤트 예시)
     cursor.execute("""

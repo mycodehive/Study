@@ -16,7 +16,7 @@ def exedir(mode="script"):
     else:
         raise ValueError("Invalid mode. Use 'cwd', 'exe', or 'script'.")
     
-def load_config(file_path=f"{exedir("script")}\\.env"):
+def load_config(file_path=f"{exedir('script')}\\.env"):
     config = configparser.ConfigParser()
     config.optionxform = str  # 키 이름의 대소문자 구분 유지
 
