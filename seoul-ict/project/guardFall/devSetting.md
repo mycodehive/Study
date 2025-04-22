@@ -6,6 +6,9 @@ https://docs.google.com/document/d/1BMVVvwdUbuOgPqAxZ6644Fkr5GLpo8zpEisSsnekLC4/
 
 <img width="485" alt="image" src="https://github.com/user-attachments/assets/92097cac-9780-4ad3-b407-7c5ced72c88d" />
 
+![image](https://github.com/user-attachments/assets/307fba89-b6a5-465e-a62c-f993f7dd5079)
+
+
 
 [uv 명령어]
 
