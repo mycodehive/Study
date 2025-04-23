@@ -9,6 +9,5 @@ dependencies = [
     "opencv-python==4.11.0.86",
     "python-telegram-bot==22.0",
     "streamlit==1.27.0",
-    "streamlit-autorefresh==1.0.1",
     "streamlit-webrtc==0.45.0",
 ]

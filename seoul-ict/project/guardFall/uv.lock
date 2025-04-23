@@ -487,7 +487,6 @@ dependencies = [
     { name = "opencv-python" },
     { name = "python-telegram-bot" },
     { name = "streamlit" },
-    { name = "streamlit-autorefresh" },
     { name = "streamlit-webrtc" },
 ]
 
@@ -497,7 +496,6 @@ requires-dist = [
     { name = "opencv-python", specifier = "==4.11.0.86" },
     { name = "python-telegram-bot", specifier = "==22.0" },
     { name = "streamlit", specifier = "==1.27.0" },
-    { name = "streamlit-autorefresh", specifier = "==1.0.1" },
     { name = "streamlit-webrtc", specifier = "==0.45.0" },
 ]
 
@@ -1445,18 +1443,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ad/61/8b7f2f40160cbfe210b533278570d5e08d19d491cd3d423606c51d4370db/streamlit-1.27.0.tar.gz", hash = "sha256:59a704195bbc669c794ddfcc3818480d9b9c2a282c02b48aa6e6de4b1c38d0a0", size = 7334574 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d0/94/11b7b1b059f6ec1fc8660f1eb91a2761008073daaa7a735209e27af09ae3/streamlit-1.27.0-py2.py3-none-any.whl", hash = "sha256:7488d4e22689d04f40449a1de521ba252ae95a5fbb5f5c606df16a4e16048b47", size = 7611401 },
-]
-
-[[package]]
-name = "streamlit-autorefresh"
-version = "1.0.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "streamlit" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/88/8c/e48bee687408fe563652bda4a7f2f5ef85d5a527b1883513fdcb05f1e66b/streamlit-autorefresh-1.0.1.tar.gz", hash = "sha256:a89abf23f2c4e52d37be442115cd5566b41f382e3c09ff08817e17a25f50b8ed", size = 351385 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/82/e378f178498f1d99a672d81df71ebe9693a106cec6a628ee52ce3288cd6d/streamlit_autorefresh-1.0.1-py3-none-any.whl", hash = "sha256:8f0a772eff9d56807d19dc422e44ef92d900bbb22b1b85de31d8d82ea7d875f1", size = 700771 },
 ]
 
 [[package]]

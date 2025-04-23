@@ -1,108 +1,109 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, VideoProcessorBase, WebRtcMode
-from streamlit_autorefresh import st_autorefresh
+from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
+import av
 import cv2
 import mediapipe as mp
 import time
-import av
-import queue
-import threading
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # 페이지 설정
-st.set_page_config(page_title="관절 추출", layout="wide")
-st.title("📷 브라우저 카메라로 관절 추출")
+st.set_page_config(
+    page_title="비동기 낙상 감지 시스템",
+    layout="wide"
+)
 
-# 🔄 3초마다 새로고침
-st_autorefresh(interval=3000, key="pose_refresh")
-
-# MediaPipe 설정
+# Mediapipe 초기화
 mp_pose = mp.solutions.pose
 mp_drawing = mp.solutions.drawing_utils
 
-# Queue: 스레드 간 데이터 전달
-info_queue = queue.Queue()
+# 현재 시각 (KST)
+def now_kst():
+    return datetime.now(ZoneInfo("Asia/Seoul")).strftime("%Y-%m-%d %H:%M:%S")
 
-# 영상 처리 클래스
-class PoseProcessor(VideoProcessorBase):
+# Pose 추출 클래스
+class PoseVideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.pose = mp_pose.Pose()
-        self.last_print_time = time.time()
+        self.landmark_data = {}
 
     def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
-        print("🔄 프레임 수신 중")
-        img = frame.to_ndarray(format="bgr24")
-        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        results = self.pose.process(img_rgb)
+        image = frame.to_ndarray(format="bgr24")
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = self.pose.process(image_rgb)
 
         if results.pose_landmarks:
-            print("✅ 관절 감지됨")
-            mp_drawing.draw_landmarks(img, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
+            mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
 
-            current_time = time.time()
-            if current_time - self.last_print_time >= 1:  # 1초 간격으로 전송
-                landmarks = results.pose_landmarks.landmark
-                msg = {
-                    "left_shoulder": landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER],
-                    "right_shoulder": landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER],
-                    "left_knee": landmarks[mp_pose.PoseLandmark.LEFT_KNEE],
-                    "right_knee": landmarks[mp_pose.PoseLandmark.RIGHT_KNEE],
-                }
-                info_queue.put(msg)
-                print("📬 좌표 전송됨")
-                self.last_print_time = current_time
-        else:
-            print("❌ 관절 감지 안됨")
+            def extract(p):
+                return {"x": p.x, "y": p.y, "z": p.z, "visibility": p.visibility}
 
-        return av.VideoFrame.from_ndarray(img, format="bgr24")
+            lm = results.pose_landmarks.landmark
+            self.landmark_data = {
+                "timestamp": now_kst(),
+                "left_shoulder": extract(lm[mp_pose.PoseLandmark.LEFT_SHOULDER]),
+                "right_shoulder": extract(lm[mp_pose.PoseLandmark.RIGHT_SHOULDER]),
+                "left_knee": extract(lm[mp_pose.PoseLandmark.LEFT_KNEE]),
+                "right_knee": extract(lm[mp_pose.PoseLandmark.RIGHT_KNEE])
+            }
 
-# ▶️ 관절 정보 지속 소비 쓰레드
-def pose_listener():
-    while True:
-        try:
-            msg = info_queue.get(timeout=1)
-            st.session_state.latest_pose = msg
-        except queue.Empty:
-            continue
+        return av.VideoFrame.from_ndarray(image, format="bgr24")
 
-# Thread 시작 (앱 최초 실행 시 1회만)
-if 'listener_started' not in st.session_state:
-    threading.Thread(target=pose_listener, daemon=True).start()
-    st.session_state.listener_started = True
+# UI 구성
+st.title("🦴 비동기 실시간 관절 추출 시스템")
 
-# 2열 화면 구성
-col1, col2 = st.columns([1, 1])
+col1, col2 = st.columns(2)
 
-# 📹 좌측: 카메라 영상
+# 📷 영상 스트리밍
 with col1:
-    st.subheader("실시간 카메라 영상")
-    webrtc_streamer(
-        key="pose",
-        mode=WebRtcMode.SENDRECV,
-        video_processor_factory=PoseProcessor,
+    st.subheader("📷 실시간 카메라 영상")
+    webrtc_ctx = webrtc_streamer(
+        key="fall-detection",
+        video_processor_factory=PoseVideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
 
-# 🦴 우측: 관절 정보 출력
+# 📋 관절 정보 출력
 with col2:
-    st.subheader("관절 좌표 정보")
-    info_box = st.empty()
+    st.subheader("📋 관절 정보")
+    landmark_box = st.empty()
 
-    # 초기화
-    if "latest_pose" not in st.session_state:
-        st.session_state.latest_pose = None
+    if webrtc_ctx.video_processor:
+        processor = webrtc_ctx.video_processor
+        last_print_time = 0
 
-    # UI 출력
-    if st.session_state.latest_pose:
-        msg = st.session_state.latest_pose
-        info_box.markdown(f"""
-        ### ⏱ 최신 관절 정보  
-        |구분|X좌표|Y좌표|Z좌표|신뢰도|적합도|
-        |:--:|:--:|:--:|:--:|:--:|:--:|
-        |왼쪽 어깨|{msg['left_shoulder'].x:.3f}|{msg['left_shoulder'].y:.3f}|{msg['left_shoulder'].z:.3f}|{msg['left_shoulder'].visibility:.2f}|{"적합" if msg['left_shoulder'].visibility > 0.7 else "부적합"}|
-        |오른쪽 어깨|{msg['right_shoulder'].x:.3f}|{msg['right_shoulder'].y:.3f}|{msg['right_shoulder'].z:.3f}|{msg['right_shoulder'].visibility:.2f}|{"적합" if msg['right_shoulder'].visibility > 0.7 else "부적합"}|
-        |왼쪽 무릎|{msg['left_knee'].x:.3f}|{msg['left_knee'].y:.3f}|{msg['left_knee'].z:.3f}|{msg['left_knee'].visibility:.2f}|{"적합" if msg['left_knee'].visibility > 0.7 else "부적합"}|
-        |오른쪽 무릎|{msg['right_knee'].x:.3f}|{msg['right_knee'].y:.3f}|{msg['right_knee'].z:.3f}|{msg['right_knee'].visibility:.2f}|{"적합" if msg['right_knee'].visibility > 0.7 else "부적합"}|
-        """)
-    else:
-        info_box.info("관절 정보를 기다리는 중입니다...")
+        while True:
+            current_time = time.time()
+            data = processor.landmark_data
+
+            if data and current_time - last_print_time >= 1:
+                def format_joint(joint):
+                    return {
+                        "X": f"{joint['x']:.2f}",
+                        "Y": f"{joint['y']:.2f}",
+                        "Z": f"{joint['z']:.2f}",
+                        "신뢰도": f"{joint['visibility']:.2f}",
+                        "적합": "적합" if joint['visibility'] > 0.7 else "부적합"
+                    }
+
+                formatted = {
+                    "시간": data["timestamp"],
+                    "왼쪽 어깨": format_joint(data["left_shoulder"]),
+                    "오른쪽 어깨": format_joint(data["right_shoulder"]),
+                    "왼쪽 무릎": format_joint(data["left_knee"]),
+                    "오른쪽 무릎": format_joint(data["right_knee"]),
+                }
+
+                # 표 형태로 출력
+                table_md = f"**🕒 {formatted['시간']}**\n\n"
+                table_md += "| 구분 | X | Y | Z | 신뢰도 | 적합 |\n|:--:|:--:|:--:|:--:|:--:|:--:|\n"
+                for name, joint in formatted.items():
+                    if name == "시간":
+                        continue
+                    table_md += f"| {name} | {joint['X']} | {joint['Y']} | {joint['Z']} | {joint['신뢰도']} | {joint['적합']} |\n"
+
+                landmark_box.markdown(table_md)
+                last_print_time = current_time
+
+            time.sleep(0.03)

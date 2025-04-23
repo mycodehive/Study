@@ -3,4 +3,3 @@ opencv-python==4.11.0.86
 mediapipe==0.10.21
 python-telegram-bot==22.0
 streamlit-webrtc==0.45.0
-streamlit-autorefresh==1.0.1
