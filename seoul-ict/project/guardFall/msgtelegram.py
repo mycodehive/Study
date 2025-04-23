@@ -5,18 +5,6 @@ from telegram import Bot
 import toml
 import os
 
-# 로컬에서 원하는 경로로 지정하는 경우에만 -[------------------
-"""
-toml_path = os.path.join(ut.exedir("script"), "\\.streamlit\\secrets.toml")
-
-print("exedir: ",ut.exedir("script"))
-print("toml_path:", toml_path)
-
-secrets = toml.load(toml_path)
-"""
-
-# -]-----------------------------------------------------
-
 TELEGRAM_TOKEN = st.secrets['telegram']['TELEGRAM_TOKEN']
 CHAT_ID = st.secrets['telegram']['CHAT_ID']
 
