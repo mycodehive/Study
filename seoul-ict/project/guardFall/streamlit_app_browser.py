@@ -255,10 +255,10 @@ else:
             # 다운로드 버튼 실행 조건 (단 한 번만 실행)
             if st.session_state.csv_ready and st.session_state.csv_data and not st.session_state.downloaded:
                 df = convert_to_wide_format(st.session_state.csv_data)
-                os.makedirs("./outputs", exist_ok=True)
+                os.makedirs("./mov/outputs", exist_ok=True)
                 #csv_path = f"./outputs/landmarks_{now_kst().replace(':', '-').replace(' ', '_')}.csv"
                 base_name = os.path.splitext(video_file.name)[0]  # 확장자 제거
-                csv_path = f"./outputs/{base_name}.csv"
+                csv_path = f"./mov/outputs/{base_name}.csv"
                 df.to_csv(csv_path, index=False, encoding='utf-8-sig')
                 st.session_state.csv_path = csv_path
                 csv_bytes = df.to_csv(index=False).encode('utf-8-sig')
