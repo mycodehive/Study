@@ -182,7 +182,7 @@ else:
 
             st.session_state.csv_data.clear()
 
-            file_path = f"../mov/{video_file.name}"
+            file_path = f"./mov/{video_file.name}"
             with open(file_path, "wb") as f:
                 f.write(video_file.read())
 
