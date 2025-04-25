@@ -8,7 +8,7 @@ st.markdown(
     """
     <style>
         [data-testid="stSidebar"] {
-            width: 180px !important;  /* 원하는 너비 값 */
+            width: 100px !important;  /* 원하는 너비 값 */
         }
     </style>
     """,
