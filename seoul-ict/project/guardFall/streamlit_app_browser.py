@@ -8,7 +8,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from collections import defaultdict
 
-# ✅ 세션 상태 초기화 (앱 최상단에 위치)
+# 세션 상태 초기화 (앱 최상단에 위치)
 for key, default in {
     "csv_data": [],
     "csv_ready": False,
@@ -42,7 +42,7 @@ def is_fallen(ls_y, rs_y, lk_y, rk_y, ls_ok, rs_ok, lk_ok, rk_ok):
         return "FALL" if count >= 3 else "-"
     return "-"
 
-# ✅ wide format으로 변환
+# wide format으로 변환
 def convert_to_wide_format(data):
     import pandas as pd
     from collections import defaultdict
@@ -92,7 +92,7 @@ def convert_to_wide_format(data):
     ]
     return pd.DataFrame(rows, columns=columns)
 
-# 🧠 관절 추출 클래스 (웹캠용)
+# 관절 추출 클래스 (웹캠용)
 class PoseVideoProcessor(VideoProcessorBase):
     def __init__(self):
         self.pose = mp_pose.Pose()
@@ -117,10 +117,10 @@ class PoseVideoProcessor(VideoProcessorBase):
 
         return av.VideoFrame.from_ndarray(image, format="bgr24")
 
-# 🧩 선택 메뉴
+# 선택 메뉴
 mode = st.radio("분석 모드를 선택하세요", ["📷 웹캠 스트리밍", "🎞️ MP4 영상 업로드"])
 
-# 📷 웹캠 모드
+# 웹캠 모드
 if mode == "📷 웹캠 스트리밍":
     col1, col2 = st.columns(2)
     with col1:
@@ -164,7 +164,7 @@ if mode == "📷 웹캠 스트리밍":
 
                 time.sleep(0.1)
 
-# 🎞️ 영상 업로드 모드
+# 영상 업로드 모드
 else:
     col1, col2 = st.columns(2)
     with col1:
