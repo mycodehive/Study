@@ -14,3 +14,13 @@ https://docs.google.com/document/d/1BMVVvwdUbuOgPqAxZ6644Fkr5GLpo8zpEisSsnekLC4/
 
  - uv run -- python .\main.py
  - uv run -- streamlit run streamlit_app.py
+
+uv add -r .\requirements.txt
+pip install tensorflow==2.17.0 만 따로 인스톨
+
+python -m ensurepip --upgrade
+python -m pip install tensorflow==2.17.0
+
+
+.\.venv\Scripts\activate    
+.\.venv\Scripts\deactivate    
