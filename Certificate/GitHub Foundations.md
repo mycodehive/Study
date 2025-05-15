@@ -79,11 +79,13 @@ https://assets.ctfassets.net/wfutmusr1t3h/1kmMx7AwI4qH8yIZgOmQlP/79e6ff1dfdee589
 
    * 초보자 친화적 모듈 + 실습 랩 제공
    * **링크**: Microsoft Learn에서 “GitHub Foundations” 검색
+   * https://learn.microsoft.com/en-us/training/paths/github-foundations/
 
 2. **LinkedIn Learning: Prepare for the GitHub Foundations Certification**
 
    * 비디오 강의 + 실무 예제
    * **링크**: LinkedIn Learning 내 “GitHub Foundations Certification”
+   * https://www.linkedin.com/learning/topics/github-foundations
 
 ### B. 추가 무료 리소스
 
