@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>풀스택 개발 학습 로드맵 요약</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #1E1E1E;
+            color: #E0E0E0;
+            position: relative;
+            overflow: hidden;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+            background: linear-gradient(135deg, #6366F1, #10B981, #F59E0B, #EC4899);
+        }
+        .tech-badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            display: inline-flex;
+            align-items: center;
+        }
+        .tech-badge i {
+            margin-right: 4px;
+        }
+        .skill-pill {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .timeline-connector {
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, #6366F1, #10B981, #F59E0B, #EC4899);
+            top: 25px;
+            bottom: 25px;
+            left: 24px;
+            z-index: 1;
+        }
+        .timeline-node {
+            position: relative;
+            z-index: 2;
+        }
+        .timeline-week {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin-right: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .resource-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(236, 72, 153, 0.5);
+            }
+            to {
+                box-shadow: 0 0 15px rgba(236, 72, 153, 0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide p-10">
+        <!-- Background Bubbles -->
+        <div class="bubble" style="width: 450px; height: 450px; top: -200px; left: -100px;"></div>
+        <div class="bubble" style="width: 300px; height: 300px; bottom: -100px; right: 200px;"></div>
+        
+        <!-- Header -->
+        <div class="mb-6">
+            <div class="flex items-center">
+                <div class="bg-purple-600 text-white rounded-lg px-4 py-1 text-sm font-medium mr-3">종합 요약</div>
+                <h1 class="text-3xl font-bold text-white">풀스택 개발 학습 여정 완성</h1>
+            </div>
+            <div class="h-1 w-32 bg-gradient-to-r from-indigo-600 via-green-500 to-pink-600 mt-2 rounded-full"></div>
+        </div>
+        
+        <!-- Main Content: 3 Column Layout -->
+        <div class="grid grid-cols-3 gap-6 mb-6 h-full">
+            <!-- Timeline Summary -->
+            <div class="bg-black bg-opacity-20 rounded-lg p-4 relative">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-map-signs text-purple-400 mr-2"></i>
+                    8주 학습 여정 로드맵
+                </h2>
+                
+                <div class="timeline-connector"></div>
+                
+                <div class="timeline-node flex items-center mb-4">
+                    <div class="timeline-week bg-indigo-600">1-2</div>
+                    <div>
+                        <div class="font-medium">프론트엔드 기초</div>
+                        <div class="text-xs text-gray-400">React + TypeScript</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-node flex items-center mb-4">
+                    <div class="timeline-week bg-blue-600">3-4</div>
+                    <div>
+                        <div class="font-medium">백엔드 기초</div>
+                        <div class="text-xs text-gray-400">FastAPI + Python</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-node flex items-center mb-4">
+                    <div class="timeline-week bg-green-600">5</div>
+                    <div>
+                        <div class="font-medium">데이터베이스</div>
+                        <div class="text-xs text-gray-400">PostgreSQL</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-node flex items-center mb-4">
+                    <div class="timeline-week bg-yellow-500">6</div>
+                    <div>
+                        <div class="font-medium">통합 실습</div>
+                        <div class="text-xs text-gray-400">프론트엔드+백엔드</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-node flex items-center mb-4">
+                    <div class="timeline-week bg-orange-500">7</div>
+                    <div>
+                        <div class="font-medium">배포 및 CI/CD</div>
+                        <div class="text-xs text-gray-400">AWS + Docker</div>
+                    </div>
+                </div>
+                
+                <div class="timeline-node flex items-center">
+                    <div class="timeline-week bg-pink-600">8</div>
+                    <div>
+                        <div class="font-medium">심화 및 최적화</div>
+                        <div class="text-xs text-gray-400">성능 + 테스트</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skill Acquisition Summary -->
+            <div class="bg-black bg-opacity-20 rounded-lg p-4">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-graduation-cap text-green-400 mr-2"></i>
+                    습득 기술 및 역량
+                </h2>
+                
+                <div class="mb-3">
+                    <div class="text-sm font-medium text-green-400 mb-2">프론트엔드</div>
+                    <div class="flex flex-wrap">
+                        <span class="skill-pill bg-indigo-900 bg-opacity-50 text-indigo-300">
+                            <i class="fab fa-react mr-1"></i> React
+                        </span>
+                        <span class="skill-pill bg-blue-900 bg-opacity-50 text-blue-300">
+                            <i class="fab fa-js-square mr-1"></i> TypeScript
+                        </span>
+                        <span class="skill-pill bg-indigo-900 bg-opacity-50 text-indigo-300">
+                            상태 관리
+                        </span>
+                        <span class="skill-pill bg-blue-900 bg-opacity-50 text-blue-300">
+                            라우팅
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="text-sm font-medium text-green-400 mb-2">백엔드</div>
+                    <div class="flex flex-wrap">
+                        <span class="skill-pill bg-green-900 bg-opacity-50 text-green-300">
+                            <i class="fab fa-python mr-1"></i> FastAPI
+                        </span>
+                        <span class="skill-pill bg-green-900 bg-opacity-50 text-green-300">
+                            비동기 처리
+                        </span>
+                        <span class="skill-pill bg-teal-900 bg-opacity-50 text-teal-300">
+                            <i class="fas fa-database mr-1"></i> PostgreSQL
+                        </span>
+                        <span class="skill-pill bg-teal-900 bg-opacity-50 text-teal-300">
+                            ORM
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="text-sm font-medium text-green-400 mb-2">인프라 & 배포</div>
+                    <div class="flex flex-wrap">
+                        <span class="skill-pill bg-yellow-900 bg-opacity-50 text-yellow-300">
+                            <i class="fab fa-aws mr-1"></i> AWS Lightsail
+                        </span>
+                        <span class="skill-pill bg-blue-900 bg-opacity-50 text-blue-300">
+                            <i class="fab fa-docker mr-1"></i> Docker
+                        </span>
+                        <span class="skill-pill bg-purple-900 bg-opacity-50 text-purple-300">
+                            <i class="fab fa-github mr-1"></i> GitHub Actions
+                        </span>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="text-sm font-medium text-green-400 mb-2">개발 방법론</div>
+                    <div class="flex flex-wrap">
+                        <span class="skill-pill bg-pink-900 bg-opacity-50 text-pink-300">
+                            <i class="fas fa-vial mr-1"></i> 테스트 코드
+                        </span>
+                        <span class="skill-pill bg-red-900 bg-opacity-50 text-red-300">
+                            <i class="fas fa-tachometer-alt mr-1"></i> 성능 최적화
+                        </span>
+                        <span class="skill-pill bg-purple-900 bg-opacity-50 text-purple-300">
+                            <i class="fas fa-sitemap mr-1"></i> API 설계
+                        </span>
+                        <span class="skill-pill bg-indigo-900 bg-opacity-50 text-indigo-300">
+                            <i class="fas fa-shield-alt mr-1"></i> 인증/보안
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <canvas id="skillChart" height="180"></canvas>
+                </div>
+            </div>
+            
+            <!-- Next Steps & Resources -->
+            <div class="bg-black bg-opacity-20 rounded-lg p-4">
+                <h2 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-rocket text-pink-400 mr-2"></i>
+                    다음 단계 및 리소스
+                </h2>
+                
+                <div class="mb-4">
+                    <div class="bg-gradient-to-r from-pink-900 to-purple-900 bg-opacity-30 p-3 rounded-md glow mb-3">
+                        <div class="font-medium mb-1 text-pink-300">
+                            <i class="fas fa-trophy mr-1"></i>
+                            축하합니다! 풀스택 개발 로드맵 완료
+                        </div>
+                        <p class="text-sm">React, FastAPI, PostgreSQL을 활용한 현대적인 웹 개발 기술을 습득했습니다. 이제 실전 프로젝트에 도전해 보세요!</p>
+                    </div>
+                </div>
+                
+                <div class="text-sm font-medium mb-2">
+                    <i class="fas fa-lightbulb text-yellow-400 mr-1"></i>
+                    추천 후속 학습 주제
+                </div>
+                
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div class="resource-card p-2 text-center">
+                        <i class="fas fa-mobile-alt text-blue-400 text-xl mb-1"></i>
+                        <div class="text-xs font-medium">모바일 앱 개발</div>
+                        <div class="text-xs text-gray-400">React Native</div>
+                    </div>
+                    <div class="resource-card p-2 text-center">
+                        <i class="fas fa-cloud text-green-400 text-xl mb-1"></i>
+                        <div class="text-xs font-medium">서버리스</div>
+                        <div class="text-xs text-gray-400">AWS Lambda</div>
+                    </div>
+                    <div class="resource-card p-2 text-center">
+                        <i class="fas fa-brain text-pink-400 text-xl mb-1"></i>
+                        <div class="text-xs font-medium">머신러닝 통합</div>
+                        <div class="text-xs text-gray-400">TensorFlow.js</div>
+                    </div>
+                    <div class="resource-card p-2 text-center">
+                        <i class="fas fa-cubes text-purple-400 text-xl mb-1"></i>
+                        <div class="text-xs font-medium">마이크로서비스</div>
+                        <div class="text-xs text-gray-400">Kubernetes</div>
+                    </div>
+                </div>
+                
+                <div class="text-sm font-medium mb-2">
+                    <i class="fas fa-bookmark text-blue-400 mr-1"></i>
+                    유용한 웹사이트 및 자료
+                </div>
+                
+                <div class="space-y-2">
+                    <div class="resource-card p-2 flex items-center">
+                        <i class="fab fa-github text-white text-lg mr-2"></i>
+                        <div>
+                            <div class="text-xs font-medium">오픈소스 프로젝트 참여</div>
+                            <div class="text-xs text-gray-400">GitHub Explore</div>
+                        </div>
+                    </div>
+                    <div class="resource-card p-2 flex items-center">
+                        <i class="fab fa-dev text-white text-lg mr-2"></i>
+                        <div>
+                            <div class="text-xs font-medium">기술 블로그 및 커뮤니티</div>
+                            <div class="text-xs text-gray-400">Dev.to, Medium</div>
+                        </div>
+                    </div>
+                    <div class="resource-card p-2 flex items-center">
+                        <i class="fas fa-laptop-code text-white text-lg mr-2"></i>
+                        <div>
+                            <div class="text-xs font-medium">실전 프로젝트 아이디어</div>
+                            <div class="text-xs text-gray-400">GitHub awesome-project-ideas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="flex justify-between items-end">
+            <div class="flex tech-badges">
+                <span class="tech-badge"><i class="fab fa-react text-blue-400"></i> React</span>
+                <span class="tech-badge"><i class="fab fa-js-square text-yellow-400"></i> TypeScript</span>
+                <span class="tech-badge"><i class="fab fa-python text-blue-300"></i> FastAPI</span>
+                <span class="tech-badge"><i class="fas fa-database text-blue-500"></i> PostgreSQL</span>
+                <span class="tech-badge"><i class="fab fa-docker text-blue-400"></i> Docker</span>
+                <span class="tech-badge"><i class="fab fa-aws text-orange-400"></i> AWS</span>
+            </div>
+            <div class="text-sm text-gray-500">8 / 8</div>
+        </div>
+    </div>
+    
+    <!-- Skills Radar Chart -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('skillChart');
+            
+            const chart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['프론트엔드', '백엔드', '데이터베이스', '배포 인프라', '테스트 코드', '성능 최적화'],
+                    datasets: [{
+                        label: '8주 후 역량',
+                        data: [85, 80, 75, 70, 65, 60],
+                        backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                        borderColor: 'rgba(99, 102, 241, 0.8)',
+                        pointBackgroundColor: 'rgba(99, 102, 241, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(99, 102, 241, 1)'
+                    }, {
+                        label: '학습 시작',
+                        data: [20, 15, 10, 5, 5, 5],
+                        backgroundColor: 'rgba(236, 72, 153, 0.2)',
+                        borderColor: 'rgba(236, 72, 153, 0.8)',
+                        pointBackgroundColor: 'rgba(236, 72, 153, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(236, 72, 153, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                display: false
+                            },
+                            pointLabels: {
+                                color: 'rgba(224, 224, 224, 0.8)',
+                                font: {
+                                    family: "'Noto Sans KR', sans-serif",
+                                    size: 10
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'rgba(224, 224, 224, 0.8)',
+                                font: {
+                                    family: "'Noto Sans KR', sans-serif",
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+</body>
+</html>

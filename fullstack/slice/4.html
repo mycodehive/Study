@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5: PostgreSQL 기초 및 심화</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #1E1E1E;
+            color: #E0E0E0;
+            position: relative;
+            overflow: hidden;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .topic-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .postgres-card {
+            border-left: 4px solid #336791;
+        }
+        .sql-card {
+            border-left: 4px solid #4169E1;
+        }
+        .advanced-card {
+            border-left: 4px solid #32CD32;
+        }
+        .integration-card {
+            border-left: 4px solid #FF8C00;
+        }
+        .highlight-postgres {
+            color: #336791;
+        }
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: rgba(51, 103, 145, 0.2);
+            color: #336791;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+            background: linear-gradient(135deg, #336791, #32CD32, #FF8C00);
+        }
+        .keyword {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 1px 5px;
+            display: inline-block;
+        }
+        .db-table {
+            border-spacing: 0;
+            width: 100%;
+        }
+        .db-table th {
+            background-color: #336791;
+            color: white;
+            text-align: left;
+            padding: 5px;
+            font-weight: normal;
+        }
+        .db-table td {
+            padding: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide p-10">
+        <!-- Background Bubbles -->
+        <div class="bubble" style="width: 400px; height: 400px; top: -200px; right: -100px;"></div>
+        <div class="bubble" style="width: 250px; height: 250px; bottom: -100px; left: 100px;"></div>
+        
+        <!-- Header -->
+        <div class="mb-6">
+            <div class="flex items-center">
+                <div class="bg-blue-700 text-white rounded-lg px-4 py-1 text-sm font-medium mr-3">WEEK 5</div>
+                <h1 class="text-3xl font-bold text-white">PostgreSQL 기초 및 심화 <span class="highlight-postgres code-font"><i class="fas fa-database mr-1"></i>PostgreSQL</span></h1>
+            </div>
+            <div class="h-1 w-32 bg-blue-700 mt-2 rounded-full"></div>
+        </div>
+        
+        <!-- Main Content: 4 Cards Grid -->
+        <div class="grid grid-cols-2 gap-6 mb-6" style="height: 540px">
+            <!-- PostgreSQL 설치 및 환경 구성 -->
+            <div class="topic-card postgres-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-server text-2xl mr-3 highlight-postgres"></i>
+                    <h2 class="text-xl font-bold">PostgreSQL 설치 및 환경 구성</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-4 pl-2">
+                    <li class="text-blue-400 font-medium">로컬 서버 설치 및 기본 설정</li>
+                    <li>관리 도구 활용 <span class="code-font">(pgAdmin, DBeaver)</span></li>
+                    <li>데이터베이스 생성 및 사용자 관리</li>
+                    <li>연결 설정 및 보안 기초</li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md mb-3">
+                    <div class="flex items-center">
+                        <div class="w-1/2">
+                            <p class="text-sm mb-2"><i class="fas fa-cogs text-blue-400 mr-2"></i>PostgreSQL 서버 구성</p>
+                            <div class="text-xs text-gray-400 mb-1">• 기본 포트: 5432</div>
+                            <div class="text-xs text-gray-400 mb-1">• 기본 데이터베이스: postgres</div>
+                            <div class="text-xs text-gray-400">• 기본 사용자: postgres</div>
+                        </div>
+                        <div class="w-1/2">
+                            <p class="text-sm mb-2"><i class="fas fa-desktop text-blue-400 mr-2"></i>GUI 클라이언트</p>
+                            <div class="flex mb-1">
+                                <span class="text-xs text-blue-300 mr-2">pgAdmin</span>
+                                <span class="text-xs text-gray-500">공식 관리 도구</span>
+                            </div>
+                            <div class="flex">
+                                <span class="text-xs text-blue-300 mr-2">DBeaver</span>
+                                <span class="text-xs text-gray-500">범용 DB 관리 도구</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SQL 기초 학습 -->
+            <div class="topic-card sql-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-code text-2xl mr-3 text-blue-500"></i>
+                    <h2 class="text-xl font-bold">SQL 기초 학습</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-3 pl-2">
+                    <li class="text-blue-400 font-medium">데이터 조작 <span class="code-font">(SELECT, INSERT, UPDATE, DELETE)</span></li>
+                    <li>테이블 관계 이해 <span class="code-font">(JOIN 연산)</span></li>
+                    <li>조건문과 필터링 <span class="code-font">(WHERE, HAVING)</span></li>
+                    <li>그룹화 및 정렬 <span class="code-font">(GROUP BY, ORDER BY)</span></li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400">-- 기본 CRUD 쿼리</span><br>
+                    <span class="text-pink-400">SELECT</span> * <span class="text-pink-400">FROM</span> users <span class="text-pink-400">WHERE</span> age > 18;<br><br>
+                    
+                    <span class="text-pink-400">INSERT INTO</span> users (name, email) <span class="text-pink-400">VALUES</span> (<span class="text-orange-300">'홍길동'</span>, <span class="text-orange-300">'hong@mail.com'</span>);<br><br>
+                    
+                    <span class="text-pink-400">SELECT</span> u.name, p.title<br>
+                    <span class="text-pink-400">FROM</span> users u<br>
+                    <span class="text-pink-400">JOIN</span> posts p <span class="text-pink-400">ON</span> u.id = p.user_id<br>
+                    <span class="text-pink-400">WHERE</span> p.created_at >= <span class="text-orange-300">'2023-01-01'</span>;<br>
+                </div>
+            </div>
+            
+            <!-- 고급 기능 -->
+            <div class="topic-card advanced-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-lightbulb text-2xl mr-3 text-green-400"></i>
+                    <h2 class="text-xl font-bold">고급 기능</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-3 pl-2">
+                    <li class="text-green-400 font-medium">JSONB 데이터 활용</li>
+                    <li>트랜잭션 관리 <span class="code-font">(BEGIN, COMMIT, ROLLBACK)</span></li>
+                    <li>인덱스 최적화 <span class="code-font">(B-tree, GIN, 부분 인덱스)</span></li>
+                    <li>뷰 및 저장 프로시저 <span class="code-font">(VIEW, FUNCTION)</span></li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400">-- JSONB 활용 예시</span><br>
+                    <span class="text-pink-400">CREATE TABLE</span> product_data (<br>
+                    &nbsp;&nbsp;id SERIAL <span class="text-pink-400">PRIMARY KEY</span>,<br>
+                    &nbsp;&nbsp;data JSONB <span class="text-pink-400">NOT NULL</span><br>
+                    );<br><br>
+                    
+                    <span class="text-pink-400">SELECT</span> * <span class="text-pink-400">FROM</span> product_data<br>
+                    <span class="text-pink-400">WHERE</span> data->'specs'->>'color' = <span class="text-orange-300">'red'</span>;<br><br>
+                    
+                    <span class="text-pink-400">CREATE INDEX</span> idx_product_color <span class="text-pink-400">ON</span> product_data ((data->'specs'->>'color'));<br>
+                </div>
+            </div>
+            
+            <!-- FastAPI와 PostgreSQL 통합 -->
+            <div class="topic-card integration-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-plug text-2xl mr-3 text-orange-400"></i>
+                    <h2 class="text-xl font-bold">FastAPI와 PostgreSQL 통합</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-3 pl-2">
+                    <li class="text-orange-400 font-medium">데이터 모델링 실습 <span class="code-font">(ERD 설계)</span></li>
+                    <li>SQLAlchemy + PostgreSQL 연결 설정</li>
+                    <li>비동기 쿼리 처리 <span class="code-font">(asyncpg)</span></li>
+                    <li>마이그레이션 관리 <span class="code-font">(Alembic)</span></li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300 mb-2">
+                    <span class="text-blue-400"># FastAPI + PostgreSQL 연결 예시</span><br>
+                    <span class="text-green-400">from</span> sqlalchemy.ext.asyncio <span class="text-green-400">import</span> create_async_engine<br><br>
+                    
+                    DATABASE_URL = <span class="text-orange-300">"postgresql+asyncpg://user:password@localhost/dbname"</span><br><br>
+                    
+                    engine = create_async_engine(DATABASE_URL)<br>
+                    async_session = sessionmaker(engine, expire_on_commit=<span class="text-blue-400">False</span>, class_=AsyncSession)<br><br>
+                    
+                    <span class="text-green-400">async def</span> <span class="text-yellow-300">get_db</span>():<br>
+                    &nbsp;&nbsp;<span class="text-green-400">async with</span> async_session() <span class="text-green-400">as</span> session:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">yield</span> session<br>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer: Learning Resources -->
+        <div class="border-t border-gray-700 pt-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-medium text-gray-400"><i class="fas fa-book mr-2"></i>추천 학습 자료:</h3>
+                <div>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>PostgreSQL 공식문서</span>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>PostgreSQL 튜토리얼 (TutorialsPoint)</span>
+                    <span class="tag"><i class="fas fa-graduation-cap mr-1"></i>SQLAlchemy + PostgreSQL 가이드</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Week Indicator -->
+        <div class="absolute top-5 right-5 text-sm text-gray-500">
+            4 / 8
+        </div>
+    </div>
+</body>
+</html>

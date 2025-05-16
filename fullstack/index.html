@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>슬라이드 뷰어</title>
+    <meta name="viewport" content="width=1280, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script defer src="slide.js"></script>
+    <style>
+        body { background: #181818; color: #fff; }
+        .slide-container { min-height: 720px; }
+        .slide-header, .slide-footer { width: 100%; }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen">
+    <!-- 헤더 -->
+    <header class="slide-header py-6 text-3xl font-bold text-center border-b border-gray-700 bg-[#23272f] w-full">
+        <span id="slide-title"></span>
+    </header>
+    <!-- 본문(슬라이드 내용) -->
+    <main id="slide-container" class="slide-container w-full flex-1 flex justify-center items-center"></main>
+    <!-- 푸터 -->
+    <footer class="slide-footer py-4 flex items-center justify-between w-full max-w-3xl mx-auto border-t border-gray-700 bg-[#23272f]">
+        <button id="prev-btn" class="px-6 py-2 bg-gray-700 rounded hover:bg-gray-600 text-lg"><i class="fas fa-chevron-left"></i> 이전</button>
+        <div id="slide-indicator" class="text-gray-400 text-base">1 / 8</div>
+        <button id="next-btn" class="px-6 py-2 bg-blue-700 rounded hover:bg-blue-600 text-lg">다음 <i class="fas fa-chevron-right"></i></button>
+    </footer>
+</body>
+</html>

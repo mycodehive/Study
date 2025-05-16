@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6: 프론트엔드 & 백엔드 통합 실습</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #1E1E1E;
+            color: #E0E0E0;
+            position: relative;
+            overflow: hidden;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .topic-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .integration-card {
+            border-left: 4px solid #6366F1;
+        }
+        .auth-card {
+            border-left: 4px solid #EC4899;
+        }
+        .error-card {
+            border-left: 4px solid #F59E0B;
+        }
+        .project-card {
+            border-left: 4px solid #10B981;
+        }
+        .highlight-text {
+            color: #6366F1;
+        }
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: rgba(99, 102, 241, 0.2);
+            color: #6366F1;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+            background: linear-gradient(135deg, #6366F1, #EC4899, #F59E0B);
+        }
+        .keyword {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 1px 5px;
+            display: inline-block;
+        }
+        .architecture-diagram {
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            position: relative;
+        }
+        .diagram-arrow {
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        .diagram-arrow::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 4px 0 4px 6px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.5);
+            right: -6px;
+            top: -3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide p-10">
+        <!-- Background Bubbles -->
+        <div class="bubble" style="width: 400px; height: 400px; top: -200px; left: -100px;"></div>
+        <div class="bubble" style="width: 250px; height: 250px; bottom: -100px; right: 100px;"></div>
+        
+        <!-- Header -->
+        <div class="mb-6">
+            <div class="flex items-center">
+                <div class="bg-indigo-600 text-white rounded-lg px-4 py-1 text-sm font-medium mr-3">WEEK 6</div>
+                <h1 class="text-3xl font-bold text-white">프론트엔드 & 백엔드 통합 실습</h1>
+            </div>
+            <div class="h-1 w-32 bg-indigo-600 mt-2 rounded-full"></div>
+        </div>
+        
+        <!-- Main Content: 4 Cards Grid -->
+        <div class="grid grid-cols-2 gap-6 mb-6" style="height: 540px">
+            <!-- 풀스택 통합 실습 -->
+            <div class="topic-card integration-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-code-branch text-2xl mr-3 text-indigo-400"></i>
+                    <h2 class="text-xl font-bold">FastAPI-React 전체 구조 연결</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-3 pl-2">
+                    <li class="text-indigo-400 font-medium">프론트엔드와 백엔드 통합 아키텍처 구성</li>
+                    <li>API 설계 원칙과 RESTful 모범 사례</li>
+                    <li>프론트엔드에서 데이터 fetching & state 관리</li>
+                    <li>CORS 설정 및 보안 고려 사항</li>
+                </ul>
+                <div class="architecture-diagram text-center p-4 mb-4">
+                    <!-- Architecture diagram -->
+                    <div class="flex justify-between items-center">
+                        <div class="bg-indigo-900 bg-opacity-30 p-3 rounded-lg">
+                            <div class="text-indigo-300 font-bold mb-1">React Frontend</div>
+                            <div class="text-xs text-gray-400">Axios / Custom Hooks</div>
+                        </div>
+                        
+                        <!-- Bidirectional arrows -->
+                        <div class="flex flex-col items-center px-4">
+                            <div class="w-20 h-1 bg-indigo-500 relative mb-1">
+                                <div class="absolute -right-1 -top-1 w-0 h-0 border-t-4 border-r-4 border-transparent border-indigo-500"></div>
+                            </div>
+                            <div class="text-xs text-gray-400">HTTP/JSON</div>
+                            <div class="w-20 h-1 bg-indigo-500 relative mt-1">
+                                <div class="absolute -left-1 -top-1 w-0 h-0 border-t-4 border-l-4 border-transparent border-indigo-500"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-900 bg-opacity-30 p-3 rounded-lg">
+                            <div class="text-blue-300 font-bold mb-1">FastAPI Backend</div>
+                            <div class="text-xs text-gray-400">Endpoints / Schemas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400">// React Custom Hook 예시</span><br>
+                    <span class="text-green-400">function</span> <span class="text-yellow-300">useApiData</span>(url) {<br>
+                    &nbsp;&nbsp;<span class="text-green-400">const</span> [data, setData] = <span class="text-pink-400">useState</span>(null);<br>
+                    &nbsp;&nbsp;<span class="text-green-400">const</span> [loading, setLoading] = <span class="text-pink-400">useState</span>(true);<br>
+                    &nbsp;&nbsp;<span class="text-green-400">const</span> [error, setError] = <span class="text-pink-400">useState</span>(null);<br><br>
+
+                    &nbsp;&nbsp;<span class="text-pink-400">useEffect</span>(() => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">const</span> <span class="text-yellow-300">fetchData</span> = <span class="text-purple-400">async</span> () => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">const</span> response = <span class="text-purple-400">await</span> axios.get(url);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setData(response.data);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span>(err) { setError(err); }<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">finally</span> { setLoading(false); }<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;fetchData();<br>
+                    &nbsp;&nbsp;}, [url]);<br><br>
+                    
+                    &nbsp;&nbsp;<span class="text-purple-400">return</span> { data, loading, error };<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- JWT 기반 인증 -->
+            <div class="topic-card auth-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-lock text-2xl mr-3 text-pink-400"></i>
+                    <h2 class="text-xl font-bold">JWT 기반 인증 처리</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-3 pl-2">
+                    <li class="text-pink-400 font-medium">JWT 기본 구조 및 동작 원리</li>
+                    <li>로그인/회원가입 구현 및 인증 플로우</li>
+                    <li>토큰 저장 및 갱신 전략</li>
+                    <li>보호된 라우트 및 권한 관리</li>
+                </ul>
+                <div class="flex justify-between mb-4">
+                    <div class="bg-black bg-opacity-30 p-2 rounded-md w-1/3 text-center">
+                        <div class="text-pink-300 text-xs mb-1">Header</div>
+                        <div class="code-font text-2xs text-gray-400">{ "alg": "HS256", "typ": "JWT" }</div>
+                    </div>
+                    <div class="bg-black bg-opacity-30 p-2 rounded-md w-1/3 text-center mx-1">
+                        <div class="text-pink-300 text-xs mb-1">Payload</div>
+                        <div class="code-font text-2xs text-gray-400">{ "sub": "user_id", "exp": 1738923520 }</div>
+                    </div>
+                    <div class="bg-black bg-opacity-30 p-2 rounded-md w-1/3 text-center">
+                        <div class="text-pink-300 text-xs mb-1">Signature</div>
+                        <div class="code-font text-2xs text-gray-400">HMACSHA256(base64UrlEncode(header + payload))</div>
+                    </div>
+                </div>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400"># FastAPI JWT 인증 예시</span><br>
+                    <span class="text-green-400">from</span> fastapi <span class="text-green-400">import</span> Depends, HTTPException<br>
+                    <span class="text-green-400">from</span> fastapi.security <span class="text-green-400">import</span> OAuth2PasswordBearer<br>
+                    <span class="text-green-400">import</span> jwt<br><br>
+                    
+                    oauth2_scheme = OAuth2PasswordBearer(tokenUrl=<span class="text-orange-300">"token"</span>)<br><br>
+                    
+                    <span class="text-green-400">async def</span> <span class="text-yellow-300">get_current_user</span>(token: <span class="text-blue-300">str</span> = Depends(oauth2_scheme)):<br>
+                    &nbsp;&nbsp;<span class="text-green-400">try</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;payload = jwt.decode(token, SECRET_KEY)<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;user_id = payload.get(<span class="text-orange-300">"sub"</span>)<br>
+                    &nbsp;&nbsp;<span class="text-green-400">except</span>:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-400">raise</span> HTTPException(status_code=401)<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">return</span> get_user(user_id)<br>
+                </div>
+            </div>
+            
+            <!-- API 에러처리 -->
+            <div class="topic-card error-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-2xl mr-3 text-yellow-500"></i>
+                    <h2 class="text-xl font-bold">API 에러처리 및 예외처리</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-3 pl-2">
+                    <li class="text-yellow-500 font-medium">백엔드 예외 처리 설계</li>
+                    <li>HTTP 상태 코드 체계적 관리</li>
+                    <li>프론트엔드 에러 핸들링 전략</li>
+                    <li>사용자 친화적인 에러 메시지 표시</li>
+                </ul>
+                <div class="mb-3 grid grid-cols-3 gap-1">
+                    <div class="text-xs rounded bg-red-900 bg-opacity-30 p-1 text-center">
+                        <div class="font-bold text-red-400">4xx</div>
+                        <div class="text-gray-400">클라이언트 오류</div>
+                    </div>
+                    <div class="text-xs rounded bg-yellow-900 bg-opacity-30 p-1 text-center">
+                        <div class="font-bold text-yellow-400">5xx</div>
+                        <div class="text-gray-400">서버 오류</div>
+                    </div>
+                    <div class="text-xs rounded bg-blue-900 bg-opacity-30 p-1 text-center">
+                        <div class="font-bold text-blue-400">2xx/3xx</div>
+                        <div class="text-gray-400">성공/리다이렉션</div>
+                    </div>
+                </div>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400"># FastAPI 전역 예외 처리기</span><br>
+                    <span class="text-green-400">from</span> fastapi <span class="text-green-400">import</span> FastAPI, Request<br>
+                    <span class="text-green-400">from</span> fastapi.responses <span class="text-green-400">import</span> JSONResponse<br><br>
+                    
+                    app = FastAPI()<br><br>
+                    
+                    <span class="text-green-400">class</span> <span class="text-yellow-300">DatabaseError</span>(Exception):<br>
+                    &nbsp;&nbsp;<span class="text-green-400">def</span> <span class="text-blue-300">__init__</span>(self, message: <span class="text-blue-300">str</span>):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;self.message = message<br><br>
+                    
+                    <span class="text-blue-400">@app.exception_handler</span>(DatabaseError)<br>
+                    <span class="text-green-400">async def</span> <span class="text-yellow-300">db_exception_handler</span>(request: Request, exc: DatabaseError):<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">return</span> JSONResponse(<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;status_code=500,<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;content={<span class="text-orange-300">"error"</span>: <span class="text-orange-300">"Database error"</span>, <span class="text-orange-300">"detail"</span>: exc.message}<br>
+                    &nbsp;&nbsp;)<br>
+                </div>
+            </div>
+            
+            <!-- 실습 프로젝트 -->
+            <div class="topic-card project-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-laptop-code text-2xl mr-3 text-green-400"></i>
+                    <h2 class="text-xl font-bold">추천 실습 프로젝트</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div class="bg-black bg-opacity-30 p-3 rounded-md">
+                        <div class="text-green-400 font-medium mb-2"><i class="fas fa-check-circle mr-1"></i> Todo 리스트 앱</div>
+                        <ul class="text-sm text-gray-300 list-disc list-inside space-y-1">
+                            <li>사용자 인증 기능</li>
+                            <li>CRUD 작업 실습</li>
+                            <li>카테고리 및 필터</li>
+                            <li>마감일 관리</li>
+                        </ul>
+                    </div>
+                    <div class="bg-black bg-opacity-30 p-3 rounded-md">
+                        <div class="text-green-400 font-medium mb-2"><i class="fas fa-comments mr-1"></i> 간단한 게시판 앱</div>
+                        <ul class="text-sm text-gray-300 list-disc list-inside space-y-1">
+                            <li>사용자 인증 및 권한</li>
+                            <li>게시글 CRUD</li>
+                            <li>댓글 기능</li>
+                            <li>파일 업로드</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-400 mb-2">
+                    <p class="font-medium mb-2"><i class="fas fa-lightbulb text-yellow-500 mr-1"></i> 핵심 실습 목표:</p>
+                    <ul class="list-disc list-inside space-y-1 pl-2">
+                        <li>프론트엔드-백엔드 통신 구조 완성</li>
+                        <li>JWT 기반의 사용자 인증 시스템 구현</li>
+                        <li>전역 에러 핸들링 구축 및 사용자 경험 개선</li>
+                        <li>데이터 유효성 검증 및 보안 고려</li>
+                    </ul>
+                </div>
+                <div class="bg-green-900 bg-opacity-20 p-3 rounded-md text-sm">
+                    <div class="flex items-center">
+                        <i class="fas fa-star-of-life text-green-500 mr-2"></i>
+                        <span class="text-green-400 font-medium">구현 목표 체크리스트:</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 mt-2">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-1"></i>
+                            <span class="text-gray-300">React 컴포넌트 설계</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-1"></i>
+                            <span class="text-gray-300">FastAPI 엔드포인트</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-1"></i>
+                            <span class="text-gray-300">JWT 인증 구현</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-500 mr-1"></i>
+                            <span class="text-gray-300">에러 핸들링</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer: Learning Resources -->
+        <div class="border-t border-gray-700 pt-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-medium text-gray-400"><i class="fas fa-book mr-2"></i>추천 학습 자료:</h3>
+                <div>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>FastAPI 공식문서의 Security 섹션</span>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>React Hook Form 라이브러리</span>
+                    <span class="tag"><i class="fas fa-graduation-cap mr-1"></i>RESTful API 설계 원칙</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Week Indicator -->
+        <div class="absolute top-5 right-5 text-sm text-gray-500">
+            5 / 8
+        </div>
+    </div>
+</body>
+</html>

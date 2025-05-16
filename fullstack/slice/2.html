@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1-2: 프론트엔드 기초</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .slide {
+            width: 1280px;
+            min-height: 720px;
+            background-color: #1E1E1E;
+            color: #E0E0E0;
+            position: relative;
+            overflow: hidden;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        .topic-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .js-card {
+            border-left: 4px solid #F7DF1E;
+        }
+        .react-card {
+            border-left: 4px solid #61DAFB;
+        }
+        .ts-card {
+            border-left: 4px solid #3178C6;
+        }
+        .api-card {
+            border-left: 4px solid #FF5733;
+        }
+        .highlight {
+            color: #61DAFB;
+        }
+        .highlight-ts {
+            color: #3178C6;
+        }
+        .highlight-js {
+            color: #F7DF1E;
+        }
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background-color: rgba(97, 218, 251, 0.2);
+            color: #61DAFB;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+            background: linear-gradient(135deg, #F7DF1E, #61DAFB, #3178C6);
+        }
+    </style>
+</head>
+<body>
+    <div class="slide p-10">
+        <!-- Background Bubbles -->
+        <div class="bubble" style="width: 400px; height: 400px; top: -200px; right: -100px;"></div>
+        <div class="bubble" style="width: 250px; height: 250px; bottom: -100px; left: 100px;"></div>
+        
+        <!-- Header -->
+        <div class="mb-6">
+            <div class="flex items-center">
+                <div class="bg-blue-500 text-white rounded-lg px-4 py-1 text-sm font-medium mr-3">WEEK 1-2</div>
+                <h1 class="text-3xl font-bold text-white">프론트엔드 기초 <span class="highlight code-font">React + TypeScript</span></h1>
+            </div>
+            <div class="h-1 w-32 bg-blue-500 mt-2 rounded-full"></div>
+        </div>
+        
+        <!-- Main Content: 4 Cards Grid -->
+        <div class="grid grid-cols-2 gap-6 mb-6" style="height: 540px">
+            <!-- JavaScript Card -->
+            <div class="topic-card js-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fab fa-js-square text-2xl mr-3 highlight-js"></i>
+                    <h2 class="text-xl font-bold">JavaScript & ES6 기초</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-4 pl-2">
+                    <li>기본 문법 & ES6+ 문법</li>
+                    <li>함수형 프로그래밍 & 고차함수</li>
+                    <li class="text-green-400 font-medium">비동기 처리 <span class="code-font text-gray-300">(Promise, async/await)</span></li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300 mb-4">
+                    <span class="text-blue-400">const</span> fetchData = <span class="text-yellow-300">async</span>() => {<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">try</span> {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">const</span> response = <span class="text-yellow-300">await</span> fetch(url);<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">const</span> data = <span class="text-yellow-300">await</span> response.json();<br>
+                    &nbsp;&nbsp;} <span class="text-blue-400">catch</span>(e) {...}<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- React Card -->
+            <div class="topic-card react-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fab fa-react text-2xl mr-3 highlight"></i>
+                    <h2 class="text-xl font-bold">React 기본 개념</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-4 pl-2">
+                    <li>JSX 문법 & 컴포넌트 기반 개발</li>
+                    <li class="text-green-400 font-medium">함수형 컴포넌트 & React Hooks</li>
+                    <li>Props & State 관리</li>
+                    <li>React Router를 활용한 라우팅</li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400">function</span> <span class="text-green-400">Counter</span>() {<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">const</span> [count, setCount] = <span class="text-yellow-300">useState</span>(0);<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">useEffect</span>(() => {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;document.<span class="text-yellow-300">title</span> = `${count} clicks`;<br>
+                    &nbsp;&nbsp;}, [count]);<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">return</span> (<span class="text-gray-500">/* JSX */</span>);<br>
+                    }
+                </div>
+            </div>
+            
+            <!-- TypeScript Card -->
+            <div class="topic-card ts-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fab fa-js-square text-2xl mr-3 highlight-ts"></i>
+                    <h2 class="text-xl font-bold">TypeScript 소개 및 적용</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-4 pl-2">
+                    <li>기본 타입 & 타입 선언</li>
+                    <li class="text-green-400 font-medium">인터페이스 & 타입 별칭</li>
+                    <li>제네릭스 <span class="code-font text-gray-400">&lt;T&gt;</span></li>
+                    <li>React + TypeScript 활용</li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300">
+                    <span class="text-blue-400">interface</span> <span class="text-green-400">User</span> {<br>
+                    &nbsp;&nbsp;id: <span class="text-yellow-300">number</span>;<br>
+                    &nbsp;&nbsp;name: <span class="text-yellow-300">string</span>;<br>
+                    &nbsp;&nbsp;email?: <span class="text-yellow-300">string</span>;<br>
+                    }<br><br>
+                    <span class="text-blue-400">const</span> user: <span class="text-green-400">User</span> = {<br>
+                    &nbsp;&nbsp;id: 1, name: <span class="text-orange-300">'홍길동'</span><br>
+                    };
+                </div>
+            </div>
+            
+            <!-- REST API Card -->
+            <div class="topic-card api-card p-5">
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-exchange-alt text-2xl mr-3 text-orange-400"></i>
+                    <h2 class="text-xl font-bold">REST API 연동</h2>
+                </div>
+                <ul class="list-disc list-inside space-y-2 mb-4 pl-2">
+                    <li>HTTP 요청/응답 개념</li>
+                    <li class="text-green-400 font-medium">Axios & Fetch API 활용</li>
+                    <li>비동기 데이터 관리 & 에러 처리</li>
+                    <li>커스텀 Hooks 생성</li>
+                </ul>
+                <div class="bg-black bg-opacity-30 p-3 rounded-md code-font text-sm text-gray-300 mb-3">
+                    <span class="text-blue-400">// Axios 사용 예시</span><br>
+                    <span class="text-blue-400">import</span> axios <span class="text-blue-400">from</span> <span class="text-orange-300">'axios'</span>;<br><br>
+                    <span class="text-blue-400">const</span> <span class="text-yellow-300">fetchUsers</span> = <span class="text-blue-400">async</span>() => {<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">const</span> response = <span class="text-blue-400">await</span> axios.get(<span class="text-orange-300">'/api/users'</span>);<br>
+                    &nbsp;&nbsp;<span class="text-blue-400">return</span> response.data;<br>
+                    };
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer: Learning Resources -->
+        <div class="border-t border-gray-700 pt-3">
+            <div class="flex justify-between items-center">
+                <h3 class="font-medium text-gray-400"><i class="fas fa-book mr-2"></i>추천 학습 자료:</h3>
+                <div>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>React 공식문서</span>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>TypeScript 공식문서</span>
+                    <span class="tag"><i class="fas fa-link mr-1"></i>FreeCodeCamp Tutorial</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Week Indicator -->
+        <div class="absolute top-5 right-5 text-sm text-gray-500">
+            1 / 8
+        </div>
+    </div>
+</body>
+</html>
