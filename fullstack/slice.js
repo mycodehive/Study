@@ -4,39 +4,40 @@ let currentSlide = 1;
 
 // 슬라이드 HTML 파일 경로
 function getSlideFile(slideNum) {
-    return `${slideNum}.html`;
+    return `slide/${slideNum}.html`;
 }
 
-// slideNum의 <title> 추출
 async function extractTitle(html) {
     const match = html.match(/<title>(.*?)<\/title>/i);
     return match ? match[1] : `슬라이드 ${currentSlide}`;
 }
 
-// <body> 내용만 추출
 function extractBody(html) {
     const match = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
     return match ? match[1] : html;
 }
 
 async function loadSlide(slideNum) {
-    const response = await fetch(getSlideFile(slideNum));
-    const html = await response.text();
-
-    // 제목 표시 (head > title에서 추출)
-    extractTitle(html).then(title => {
-        document.getElementById('slide-title').textContent = title;
-    });
-
-    // body 내용 표시
-    document.getElementById('slide-container').innerHTML = extractBody(html);
-
-    // 페이지 인디케이터
-    document.getElementById('slide-indicator').textContent = `${slideNum} / ${slideCount}`;
-
-    // 버튼 활성/비활성
-    document.getElementById('prev-btn').disabled = slideNum === 1;
-    document.getElementById('next-btn').disabled = slideNum === slideCount;
+    try {
+        const response = await fetch(getSlideFile(slideNum));
+        if (!response.ok) throw new Error("슬라이드 파일을 불러올 수 없습니다.");
+        const html = await response.text();
+        extractTitle(html).then(title => {
+            document.getElementById('slide-title').textContent = title;
+        });
+        document.getElementById('slide-container').innerHTML = extractBody(html);
+        document.getElementById('slide-indicator').textContent = `${slideNum} / ${slideCount}`;
+        document.getElementById('prev-btn').disabled = slideNum === 1;
+        document.getElementById('next-btn').disabled = slideNum === slideCount;
+    } catch (e) {
+        document.getElementById('slide-container').innerHTML =
+            `<div class="text-red-400 text-2xl text-center py-20">
+            [${slideNum}.html] 파일을 불러올 수 없습니다.<br>
+            <span style="font-size:1.2rem;">에러: ${e.message}</span><br>
+            <span style="font-size:1rem;">경로/파일명/네트워크 오류를 확인하세요.</span>
+            </div>`;
+        document.getElementById('slide-title').textContent = "에러";
+    }
 }
 
 document.getElementById('prev-btn').addEventListener('click', () => {
@@ -51,8 +52,6 @@ document.getElementById('next-btn').addEventListener('click', () => {
         loadSlide(currentSlide);
     }
 });
-
-// 키보드 방향키로 넘기기
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' && currentSlide > 1) {
         currentSlide--;
@@ -62,6 +61,4 @@ document.addEventListener('keydown', (e) => {
         loadSlide(currentSlide);
     }
 });
-
-// 첫 슬라이드 로드
 window.onload = () => loadSlide(currentSlide);
