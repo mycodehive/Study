@@ -23,7 +23,6 @@ Activate with: .venv\Scripts\activate
 
 ### Step 2
 [각각]
-  - .venv\Scripts\activate
   - uv add -r requirements.txt
 
 ### Step 3
