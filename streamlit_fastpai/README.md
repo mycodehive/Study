@@ -1,5 +1,5 @@
 <pre>
-PS C:\streamlit_fastpai\backend> uv init
+PS C:\streamlit_fastpai\backend> uv init -p 3.12
 Initialized project `backend`
 PS C:\streamlit_fastpai\backend> uv venv --python 3.12
 Using CPython 3.12.9
@@ -24,3 +24,8 @@ Activate with: .venv\Scripts\activate
 
 [terminal 2]
   - frontend>uv run -- streamlit run app.py
+
+---
+
+[DB]
+  - https://dbeaver.io/download/
