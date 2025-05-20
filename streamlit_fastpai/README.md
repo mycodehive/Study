@@ -16,8 +16,8 @@ Activate with: .venv\Scripts\activate
 </pre>
 
 [각각]
-.venv\Scripts\activate
-uv add -r requirements.txt
+  - .venv\Scripts\activate
+  - uv add -r requirements.txt
 
 [terminal 1] - 항상 이것부터 먼저 실행
   - backend>uvicorn main:app --reload --host 0.0.0.0 --port 8000
