@@ -30,6 +30,7 @@ class UserLogin(BaseModel):
     password: str
 
 def get_db():
+    # 데이터베이스 세션을 생성하고 반환하는 제너레이터 함수
     db = SessionLocal()
     try:
         yield db
@@ -38,8 +39,10 @@ def get_db():
 
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
+    # 회원가입 기능: 이미 존재하는 사용자인지 확인 후, 신규 사용자 등록
     db_user = db.query(User).filter(User.username == user.username).first()
     if db_user:
+        # 이미 등록된 사용자일 경우 예외 발생
         raise HTTPException(status_code=400, detail="Username already registered")
     hashed_password = pwd_context.hash(user.password)
     new_user = User(username=user.username, password=hashed_password)
@@ -50,7 +53,9 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 
 @app.post("/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
+    # 로그인 기능: 사용자 존재 여부와 비밀번호 일치 여부 확인
     db_user = db.query(User).filter(User.username == user.username).first()
     if not db_user or not pwd_context.verify(user.password, db_user.password):
+        # 사용자 정보가 없거나 비밀번호가 틀릴 경우 예외 발생
         raise HTTPException(status_code=400, detail="Invalid username or password")
     return {"msg": "Login successful"}
