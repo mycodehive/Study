@@ -11,6 +11,12 @@ PS C:\streamlit_fastpai\backend> uv venv --python 3.12
 Using CPython 3.12.9
 Creating virtual environment at: .venv
 Activate with: .venv\Scripts\activate
+PS C:\streamlit_fastpai\frontend> uv init -p 3.12
+Initialized project `frontend`
+PS C:\streamlit_fastpai\frontend> uv venv --python 3.12
+Using CPython 3.12.9
+Creating virtual environment at: .venv
+Activate with: .venv\Scripts\activate
 </pre>
 
 ### Step 2
